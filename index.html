@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ColorMixer — color playground</title>
+<link rel="stylesheet" href="style.css"/>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>"/>
+</head>
+<body>
+<header>
+  <div class="brand">🎨 <strong>ColorMixer</strong></div>
+  <div class="tabs">
+    <button class="tab active" data-tab="picker">Picker</button>
+    <button class="tab" data-tab="gradient">Gradient</button>
+    <button class="tab" data-tab="palette">Palette</button>
+  </div>
+</header>
+
+<main>
+  <!-- PICKER -->
+  <section id="tab-picker" class="tab-panel active">
+    <div class="picker-layout">
+      <div class="swatch-big" id="swatch-big"></div>
+      <div class="sliders">
+        <div class="slider-group">
+          <div class="slider-row"><label>H</label><input type="range" id="h" min="0" max="360" value="220"><span class="val" id="h-v">220</span></div>
+          <div class="slider-row"><label>S</label><input type="range" id="s" min="0" max="100" value="70"><span class="val" id="s-v">70</span></div>
+          <div class="slider-row"><label>L</label><input type="range" id="l" min="0" max="100" value="55"><span class="val" id="l-v">55</span></div>
+        </div>
+        <div class="formats">
+          <div class="fmt-row"><label>HEX</label><input readonly id="hex"/><button class="copy-btn" data-copy="hex">Copy</button></div>
+          <div class="fmt-row"><label>RGB</label><input readonly id="rgb"/><button class="copy-btn" data-copy="rgb">Copy</button></div>
+          <div class="fmt-row"><label>HSL</label><input readonly id="hsl"/><button class="copy-btn" data-copy="hsl">Copy</button></div>
+          <div class="fmt-row"><label>OKLCH</label><input readonly id="oklch"/><button class="copy-btn" data-copy="oklch">Copy</button></div>
+        </div>
+        <button id="save-swatch" class="btn">Save to palette</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRADIENT -->
+  <section id="tab-gradient" class="tab-panel">
+    <div class="gradient-preview" id="grad-preview"></div>
+    <div class="gradient-controls">
+      <div class="grad-stops">
+        <div class="stop" data-i="0"><input type="color" value="#7c3aed"><input type="range" min="0" max="100" value="0"></div>
+        <div class="stop" data-i="1"><input type="color" value="#ec4899"><input type="range" min="0" max="100" value="50"></div>
+        <div class="stop" data-i="2"><input type="color" value="#f59e0b"><input type="range" min="0" max="100" value="100"></div>
+      </div>
+      <div class="grad-type">
+        <label><input type="radio" name="gt" value="linear" checked> Linear</label>
+        <label><input type="radio" name="gt" value="radial"> Radial</label>
+        <label><input type="radio" name="gt" value="conic"> Conic</label>
+      </div>
+      <div class="grad-angle"><label>Angle</label><input type="range" id="grad-angle" min="0" max="360" value="135"><span class="val" id="grad-angle-v">135°</span></div>
+      <div class="grad-output">
+        <label>CSS</label>
+        <textarea readonly id="grad-css" rows="2"></textarea>
+        <button class="copy-btn" data-copy="grad-css">Copy</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PALETTE -->
+  <section id="tab-palette" class="tab-panel">
+    <div class="palette-head">
+      <h2>Saved palette</h2>
+      <div class="palette-actions">
+        <button id="export-json" class="btn">Export JSON</button>
+        <button id="export-css" class="btn">Export CSS</button>
+        <button id="clear-palette" class="btn danger">Clear</button>
+      </div>
+    </div>
+    <div id="palette-grid" class="palette-grid"></div>
+  </section>
+</main>
+
+<div id="toast" class="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>
